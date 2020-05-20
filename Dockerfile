@@ -4,23 +4,22 @@ node{
    def stopTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/shutdown.sh"
    def startTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/startup.sh"
    def copyWar = "scp -o StrictHostKeyChecking=no target/myweb.war ${tomcatUser}@${tomcatIp}:/opt/tomcat8/webapps/"
-
-  stage('SCM Checkout'){
-     git 'https://github.com/narravulavikas/hello-world.git'
+   stage('SCM Checkout'){
+        git branch: 'master', 
+	 url: 'https://github.com/narravulavikas/hello-world.git'
+   }
+   stage('Maven Build'){
+        def mvnHome = tool name: 'M3', type: 'maven'
+		sh "${mvnHome}/bin/mvn clean package"
    }
    
-  stage(mavenbuild){
-     def mvnHome =  tool name: 'M3', type: 'maven'   
-     sh "${mvnHome}/bin/mvn clean package"
-   }
-   
-    
-    stage(deploy){
-    sh 'mv target/myweb*.war target/myweb.war' 
+   stage('Deploy Dev'){
+	   sh 'mv target/myweb*.war target/myweb.war' 
 	   
        sshagent(['tomcat-dev']) {
 			sh "${stopTomcat}"
 			sh "${copyWar}"
 			sh "${startTomcat}"
 	   }
+   }
 }
