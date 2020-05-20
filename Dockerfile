@@ -23,3 +23,4 @@ node{
 			sh "${copyWar}"
 			sh "${startTomcat}"
 	   }
+}
