@@ -1,9 +1,5 @@
 node{
-   def tomcatIp = '18.191.93.123'
-   def tomcatUser = 'ec2-user'
-   def stopTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/shutdown.sh"
-   def startTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/startup.sh"
-   def copyWar = "scp -o StrictHostKeyChecking=no target/myweb.war ${tomcatUser}@${tomcatIp}:/opt/tomcat8/webapps/"
+   
    stage('SCM Checkout'){
         git branch: 'master', 
 	 url: 'https://github.com/narravulavikas/hello-world.git'
@@ -14,12 +10,10 @@ node{
    }
    
    stage('Deploy Dev'){
-	  sh 'mv target/myweb*.war target/myweb.war'
-	   
-       sshagent(['tomcat-dev']) {
-			sh "${stopTomcat}"
-			sh "${copyWar}"
-			sh "${startTomcat}"
-	   }
+	  
+	  sshagent(['tomcat1 ']) {
+	    sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@18.220.0.141:/opt/tomcat/webapp/'
+    
+       }
    }
 }
