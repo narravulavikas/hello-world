@@ -20,7 +20,7 @@ node{
      
    }
    
-   stage('deploy to tomcat){
+   stage('deploy to tomcat'){
     
             sshagent(['ssh']) {
              sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/project1/webapp/target/webapp.war ec2-user@172.31.42.97:/opt/tomcat/webapps'
