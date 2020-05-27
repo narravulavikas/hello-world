@@ -19,5 +19,13 @@ node{
      nexusArtifactUploader artifacts: [[artifactId: 'maven-project', classifier: '', file: '/var/lib/jenkins/workspace/project1/webapp/target/webapp.war', type: 'war ']], credentialsId: 'sona', groupId: 'com.example.maven-project', nexusUrl: '172.31.12.116:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'apprelease/', version: '1.0-SNAPSHOT '
      
    }
+   
+   stage('deploy to tomcat){
+    
+            sshagent(['ssh']) {
+             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/project1/webapp/target/webapp.war ec2-user@172.31.42.97:/opt/tomcat/webapps'
+             }
+	    
+   }     
     
  }
