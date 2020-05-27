@@ -7,7 +7,7 @@ node{
    stage('Maven Build'){
         def mvnHome = tool name: 'M3', type: 'maven'
 		sh "${mvnHome}/bin/mvn clean package"
-		archiveArtifacts artifacts: 'webapp.war', fingerprint: true
+		archiveArtifacts artifacts: 'webapp/target/webapp.war', fingerprint: true
    }
    
    stage('allure_repots'){
