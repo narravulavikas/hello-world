@@ -9,7 +9,7 @@ node{
 		sh "${mvnHome}/bin/mvn clean package"
    }
    
-   stage('allure_repots){
+   stage('allure_repots'){
        allure includeProperties: false, jdk: '', results: [[path: '/var/lib/jenkins/workspace/project1/allure']]
        
    }
