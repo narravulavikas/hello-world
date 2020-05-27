@@ -13,5 +13,9 @@ node{
        allure includeProperties: false, jdk: '', results: [[path: '/var/lib/jenkins/workspace/project1/allure-report']]
        
    }
-
+   
+   stage('nexus upload'){
+      nexusArtifactUploader artifacts: [[artifactId: 'maven-project', classifier: '', file: 'target/Maven Project-1.0-SNAPSHOT.war', type: 'war ']], credentialsId: 'nexus3', groupId: 'com.example.maven-project', nexusUrl: '18.219.142.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'apprelease/', version: '1.0-SNAPSHOT'
+      
+   }
 }
