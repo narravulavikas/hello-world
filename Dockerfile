@@ -10,7 +10,7 @@ node{
    }
    
    stage('allure_repots'){
-       allure includeProperties: false, jdk: '', results: [[path: '/var/lib/jenkins/workspace/project1/allure']]
+       allure includeProperties: false, jdk: '', properties: [[key: '', value: '']], results: [[path: 'allure-results'], [path: '/var/lib/jenkins/workspace/project1/allure-report']]
        
    }
 
