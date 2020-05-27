@@ -20,11 +20,9 @@ node{
      
    }
    
-   stage('deploy to tomcat'){
+   stage('ansible'){
     
-            sshagent(['ssh']) {
-             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/project1/webapp/target/webapp.war ec2-user@172.31.42.97:/opt/tomcat/webapps'
-             }
+           sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible_server ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook /opt/playbooks/copyfile.yml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/opt/playbooks', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '/var/lib/jenkins/workspace/project1/webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 	    
    }     
     
