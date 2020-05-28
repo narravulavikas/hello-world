@@ -35,6 +35,7 @@ node{
 docker tag docker_demo narravulavikas/docker_demo
 docker push narravulavikas/docker_demo
 docker rmi docker_demo narravulavikas/docker_demo
+sudo rm -rf webapp.war
 ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
     stage('kubernetes'){
