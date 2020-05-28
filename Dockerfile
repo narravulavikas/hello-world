@@ -37,4 +37,22 @@ docker push narravulavikas/docker_demo
 docker rmi docker_demo narravulavikas/docker_demo
 ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
+        stage("deploying to Tomcat") {
+            steps {
+                script {
+                    def remote = [:]
+                    remote.name = 'kubernetes_server'
+                    remote.host = '44.234.42.249'
+                    remote.user = 'cloud_user'
+                    remote.password = 'vikas1234'
+                    remote.allowAnyHosts = true
+  
+                    sshCommand remote: remote, command: "kubectl delete deployment vikas-deployment"
+                    sshCommand remote: remote, command: "kubectl delete svc vikas-service"
+                    sshCommand remote: remote, command: "kubectl apply -f /home/cloud_user/Desktop/deployment.yaml"
+                    sshCommand remote: remote, command: "kubectl apply -f /home/cloud_user/Desktop/service.yaml"
+                    
+                }
+            }
+        }
  }
