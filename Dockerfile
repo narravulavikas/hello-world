@@ -37,22 +37,10 @@ docker push narravulavikas/docker_demo
 docker rmi docker_demo narravulavikas/docker_demo
 ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
-        stage("deploying to Tomcat") {
-            steps {
-                script {
-                    def remote = [:]
-                    remote.name = 'tomcat_server'
-                    remote.host = '52.202.124.0'
-                    remote.user = 'ubuntu'
-                    remote.password = 'devops@1996'
-                    remote.allowAnyHosts = true
-  
-                    sshCommand remote: remote, command: "kubectl delete deployment vikas-deployment"
-                    sshCommand remote: remote, command: "kubectl delete svc vikas-service"
-                    sshCommand remote: remote, command: "kubectl apply -f /home/cloud_user/Desktop/deployment.yaml"
-                    sshCommand remote: remote, command: "kubectl apply -f /home/cloud_user/Desktop/service.yaml"
-                    
-                }
-            }
-        }
+    stage('kubernetes'){
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'kubernetes', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''kubectl delete deployment vikas-deployment
+ kubectl delete svc vikas-service
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+    }
  }
