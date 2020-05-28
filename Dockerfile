@@ -40,7 +40,7 @@ docker rmi docker_demo narravulavikas/docker_demo
     stage('kubernetes'){
     sshPublisher(publishers: [sshPublisherDesc(configName: 'kubernetes', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''kubectl delete deployment vikas-deployment
  kubectl delete svc vikas-service
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+kubectl apply -f /home/cloud_user/Desktop/deployment.yaml
+kubectl apply -f /home/cloud_user/Desktop/service.yaml''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
  }
