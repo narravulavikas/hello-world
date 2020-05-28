@@ -27,14 +27,12 @@ node{
    }  
    
    stage('docker image'){
-  sshPublisher(publishers: [sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ec2-user', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/ec2-user
-docker build -t docker_demo
-docker tag docker_demo narravulavikas/docker_demo
-docker push narravulavikas/docker_demo
-docker rmi docker_demo narravulavikas/docker_demo
-''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ec2-user', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-   
-   }
- 
+  sshPublisher(publishers: [sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ec2-user/', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/ec2-user
+docker build -t dockerdemo
+docker tag dockerdemo narravulavikas/dockerdemo
+docker push narravulavikas/dockerdemo
+docker rmi dockerdemo narravulavikas/dockerdemo
+''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ec2-user/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+    }
  
  }
