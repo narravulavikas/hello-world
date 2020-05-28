@@ -1,3 +1,3 @@
-<h1> Hello, Welcome to Valaxy Technologies !!! </h1>
-<h2> Deploying on Kubernetes </h2>
-<h3> One last test </h3>
+<h1> Hello, Vikas !!! </h1>
+<h2> AAkASH ERRIPUKUU GADU </h2>
+<h3> PRudhvi Reddy Pedhakonda pukku </h3>
