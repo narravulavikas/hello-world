@@ -41,10 +41,10 @@ docker rmi docker_demo narravulavikas/docker_demo
             steps {
                 script {
                     def remote = [:]
-                    remote.name = 'kubernetes_server'
-                    remote.host = '44.234.42.249'
-                    remote.user = 'cloud_user'
-                    remote.password = 'vikas1234'
+                    remote.name = 'tomcat_server'
+                    remote.host = '52.202.124.0'
+                    remote.user = 'ubuntu'
+                    remote.password = 'devops@1996'
                     remote.allowAnyHosts = true
   
                     sshCommand remote: remote, command: "kubectl delete deployment vikas-deployment"
