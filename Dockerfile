@@ -24,6 +24,15 @@ node{
     
     sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible_server ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'ansible_server ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook /home/ec2-user/copyfile.yml ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 	    
-   }     
-    
+   }  
+   
+   stage('docker image'){
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible_server ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/opt/docker ', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'ansible_server ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /opt/docker
+docker build -t docker_demo.
+docker tag docker_demo narravulavikas/docker_demo
+docker push narravulavikas/docker_demo
+docker rmi docker_demo narravulavikas/docker_demo
+''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/opt/docker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+ 
+    }
  }
