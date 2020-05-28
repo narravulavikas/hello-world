@@ -1,5 +1,4 @@
 node{
-   #scm checkout 
    stage('SCM Checkout'){
         git branch: 'master', 
 	 url: 'https://github.com/narravulavikas/hello-world.git'
