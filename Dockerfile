@@ -27,11 +27,13 @@ node{
    }  
    
    stage('docker image'){
-   sshPublisher(publishers: [sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt//docker', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /opt/docker
+   sshPublisher(publishers: [sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/opt/docker', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), sshPublisherDesc(configName: 'docker ', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /opt/docker
 docker build -t docker_demo.
 docker tag docker_demo narravulavikas/docker_demo
 docker push narravulavikas/docker_demo
 docker rmi docker_demo narravulavikas/docker_demo
-''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt//docker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])ctory: '//opt//docker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-    }
+''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/opt/docker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile1')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+   }
+ 
+ 
  }
